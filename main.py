@@ -8,12 +8,13 @@ from keras.preprocessing.image import img_to_array
 app = Flask(__name__)
 
 # Load the pre-trained semaphore model
-# Replace 'path_to_your_model' with the actual path to your model file
 model_path = 'model_ml.h5'
 model = load_model(model_path)
 
 # Semaphore classes
-classes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']  # Replace with your semaphore classes
+classes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+           'w', 'x', 'y', 'z']
+
 
 # Function to preprocess the image
 def preprocess_image(image_path):
@@ -46,12 +47,23 @@ def classify_semaphore():
     predicted_class_index = np.argmax(predictions[0])
     predicted_class = classes[predicted_class_index]
 
-    # Prepare JSON response
+    # Get the confidence of the prediction
+    confidence = float(predictions[0][predicted_class_index])
 
-    response = {
-        'predicted_class': predicted_class,
-        'confidence': float(predictions[0][predicted_class_index])
-    }
+    # Set a threshold for confidence (adjust as needed)
+    confidence_threshold = 0.5  # Example threshold value
+
+    # Prepare JSON response
+    if confidence >= confidence_threshold:
+        response = {
+            'predicted_class': predicted_class,
+            'confidence': confidence
+        }
+    else:
+        response = {
+            'predicted_class': 'Not a Semaphore',
+            'confidence': confidence
+        }
 
     # Remove the temporary image file
     os.remove(temp_image_path)
