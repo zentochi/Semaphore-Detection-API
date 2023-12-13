@@ -32,7 +32,7 @@ Response:
     "success": true,
     "message": {
         "confidence": 1.0,
-        "predicted_class": "b"
+        "predicted_class": "B"
     }
 }
 ```
