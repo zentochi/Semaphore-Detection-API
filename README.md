@@ -19,6 +19,9 @@ Request Body:
 
 
 Response:
+
+- Detected image confidence > 0.5
+
 ```
 {
     "message": {
@@ -29,9 +32,23 @@ Response:
 }
 ```
 
+- Detected image confidence < 0.5
+
 ```
 {
-    "message": "Invalid file format. Please upload a JPG, JPEG, or PNG image."
+    "message": {
+        "confidence": 1.0,
+        "predicted_class": "Not a Semaphore"
+    },
+    "success": true
+}
+```
+
+- Invalid file format
+
+```
+{
+    "message": "Invalid file format. Please upload a JPG, JPEG, or PNG image.",
     "success": false
 }
 
