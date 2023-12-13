@@ -1,4 +1,5 @@
 # Semaphore-Detection-API 🔥
+
 <details>
 <summary> Documentation </summary>
 
