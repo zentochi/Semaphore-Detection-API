@@ -7,10 +7,11 @@ from keras.preprocessing.image import img_to_array
 
 app = Flask(__name__)
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg'])
+app.json.sort_keys = False
 
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 
 # Load the pre-trained semaphore model
@@ -31,14 +32,16 @@ def preprocess_image(image_path):
     return img
 
 
+# Route for semaphore image classification
 @app.route('/classify_semaphore', methods=['POST'])
 def classify_semaphore():
     if 'image' not in request.files:
-        response = {
-            'success': False,
-            'message': 'No image uploaded'
-        }
-        return jsonify(response), 400
+        response = \
+            {
+                'success': False,
+                'message': 'No image uploaded'
+            }
+        return jsonify(response), 400, {'Content-Type': 'application/json; charset=utf-8'}
 
     image_file = request.files['image']
 
@@ -65,33 +68,46 @@ def classify_semaphore():
 
         # Prepare JSON response
         if confidence >= confidence_threshold:
-            response = {
-                'success': True,
-                'message': {
-                    'predicted_class': predicted_class,
-                    'confidence': confidence
+            response = \
+                {
+                    'success': True,
+                    'message': {
+                        'predicted_class': predicted_class,
+                        'confidence': confidence
+                    }
                 }
-            }
         else:
-            response = {
-                'success': False,
-                'message': {
-                    'predicted_class': 'Not a Semaphore',
-                    'confidence': confidence
+            response = \
+                {
+                    'success': True,
+                    'message': {
+                        'predicted_class': 'Not a Semaphore',
+                        'confidence': confidence
+                    }
                 }
-            }
 
         # Remove the temporary image file
         os.remove(temp_image_path)
 
-        return jsonify(response)
+        return jsonify(response), {'Content-Type': 'application/json; charset=utf-8'}
     else:
-        response = {
-            "success": False,
-            "message": "Invalid file format. Please upload a JPG, JPEG, or PNG image."
-        }
-        return jsonify(response), 400
+        response = \
+            {
+                'success': False,
+                'message': "Invalid file format. Please upload a JPG, JPEG, or PNG image."
+            }
+        return jsonify(response), 400, {'Content-Type': 'application/json; charset=utf-8'}
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# @app.route('/')
+# def index():
+#     return jsonify({
+#         "status" : {
+#             "code" : 200,
+#             "message" : "Succes fetching the API",
+#         },
+#         "data" : None,
+#     }),200
