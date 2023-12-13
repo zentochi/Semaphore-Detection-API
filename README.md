@@ -25,11 +25,11 @@ Response:
 
 ```
 {
+    "success": true,
     "message": {
         "confidence": 1.0,
         "predicted_class": "b"
-    },
-    "success": true
+    }
 }
 ```
 
@@ -37,11 +37,11 @@ Response:
 
 ```
 {
+    "success": true,
     "message": {
         "confidence": 1.0,
         "predicted_class": "Not a Semaphore"
     },
-    "success": true
 }
 ```
 
@@ -49,8 +49,8 @@ Response:
 
 ```
 {
-    "message": "Invalid file format. Please upload a JPG, JPEG, or PNG image.",
-    "success": false
+    "success": false,
+    "message": "Invalid file format. Please upload a JPG, JPEG, or PNG image."
 }
 
 ```
