@@ -21,10 +21,21 @@ Request Body:
 Response:
 ```
 {
-    "confidence": 1.0,
-    "predicted_class": "e"
+    "message": {
+        "confidence": 1.0,
+        "predicted_class": "b"
+    },
+    "success": true
 }
 ```
 
-*notes: for better classification, image should be taken potrait in camera or image size ratio should be 3:4
+```
+{
+    "message": "Invalid file format. Please upload a JPG, JPEG, or PNG image."
+    "success": false
+}
 
+```
+
+*notes: for better classification, image should be taken potrait in camera or image size ratio should be 3:4
+</sumamry>

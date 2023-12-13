@@ -35,7 +35,7 @@ def preprocess_image(image_path):
 def classify_semaphore():
     if 'image' not in request.files:
         response = {
-            'success': 'false',
+            'success': False,
             'message': 'No image uploaded'
         }
         return jsonify(response), 400
@@ -66,7 +66,7 @@ def classify_semaphore():
         # Prepare JSON response
         if confidence >= confidence_threshold:
             response = {
-                'success': "true",
+                'success': True,
                 'message': {
                     'predicted_class': predicted_class,
                     'confidence': confidence
@@ -74,7 +74,7 @@ def classify_semaphore():
             }
         else:
             response = {
-                'success': "false",
+                'success': False,
                 'message': {
                     'predicted_class': 'Not a Semaphore',
                     'confidence': confidence
@@ -87,7 +87,7 @@ def classify_semaphore():
         return jsonify(response)
     else:
         response = {
-            "success": "false",
+            "success": False,
             "message": "Invalid file format. Please upload a JPG, JPEG, or PNG image."
         }
         return jsonify(response), 400
