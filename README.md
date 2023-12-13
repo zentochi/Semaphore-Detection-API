@@ -56,4 +56,4 @@ Response:
 ```
 
 *notes: for better classification, image should be taken potrait in camera or image size ratio should be 3:4
-</sumamry>
+</details>
