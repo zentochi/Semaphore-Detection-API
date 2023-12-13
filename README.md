@@ -39,7 +39,7 @@ Response:
 {
     "success": true,
     "message": {
-        "confidence": 1.0,
+        "confidence": 0.2,
         "predicted_class": "Not a Semaphore"
     },
 }
