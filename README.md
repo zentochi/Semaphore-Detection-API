@@ -21,6 +21,10 @@ Request Body:
 
 Response:
 
+200
+
+--- 
+
 - Detected image confidence > 0.5
 
 ```
@@ -45,6 +49,9 @@ Response:
 }
 ```
 
+400
+
+--- 
 - Invalid file format
 
 ```
