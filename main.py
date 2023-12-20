@@ -101,13 +101,3 @@ def classify_semaphore():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# @app.route('/')
-# def index():
-#     return jsonify({
-#         "status" : {
-#             "code" : 200,
-#             "message" : "Succes fetching the API",
-#         },
-#         "data" : None,
-#     }),200
