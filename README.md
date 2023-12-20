@@ -64,3 +64,8 @@ Response:
 
 *notes: for better classification, image should be taken potrait in camera or image size ratio should be 3:4
 </details>
+
+<details>
+<summary> Installation </summary>
+run `flask run` with virtual environment activated
+</details>
